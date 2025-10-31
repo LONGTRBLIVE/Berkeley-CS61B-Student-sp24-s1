@@ -5,8 +5,8 @@ public class JavaExercises {
 
     /** Returns an array [1, 2, 3, 4, 5, 6] */
     public static int[] makeDice() {
-        // TODO: Fill in this function.
-        return null;
+        int[] newarray = {1, 2, 3, 4, 5, 6};
+        return newarray;
     }
 
     /** Returns the order depending on the customer.
@@ -14,15 +14,29 @@ public class JavaExercises {
      *  If the customer is Erik, return ["sushi", "pasta", "avocado", "coffee"].
      *  In any other case, return an empty String[] of size 3. */
     public static String[] takeOrder(String customer) {
-        // TODO: Fill in this function.
-        return null;
+        if (customer == "Ergun") {
+            return new String[] {"beyti", "pizza", "hamburger", "tea"};
+        } else if (customer == "Erik") {
+            return  new String[] {"sushi", "pasta", "avocado", "coffee"};
+        } else {
+            return new String[] {null, null, null};
+        }
     }
 
     /** Returns the positive difference between the maximum element and minimum element of the given array.
      *  Assumes array is nonempty. */
     public static int findMinMax(int[] array) {
-        // TODO: Fill in this function.
-        return 0;
+        int min = array[0];
+        int max = min;
+        for (int i : array){
+            if (i < min) {
+                min = i;
+            } else if (i > max) {
+                max = i;
+            }
+        }
+        int difference = max - min;
+        return difference;
     }
 
     /**
@@ -38,8 +52,17 @@ public class JavaExercises {
     }
 
     private static List<Integer> hailstoneHelper(int x, List<Integer> list) {
-        // TODO: Fill in this function.
-        return null;
-    }
+        list.add(x);
 
+        if (x == 1) {
+            return list;
+        }
+
+        if (x % 2 ==0) {
+            return hailstoneHelper(x/2, list);
+        } else {
+            return hailstoneHelper(x*3 + 1, list);
+        }
+
+    }
 }

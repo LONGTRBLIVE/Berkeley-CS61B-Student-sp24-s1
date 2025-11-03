@@ -171,6 +171,21 @@ public class Model {
         int targetY = y;
 
         // TODO: Tasks 5, 6, and 10. Fill in this function.
+        while (targetY + 1 < size()) {
+            Tile nextTile = board.tile(x, targetY + 1);
+            if (nextTile == null){
+                targetY += 1;
+            } else {
+                if (!nextTile.wasMerged() && myValue == nextTile.value()){
+                    targetY += 1;
+                    this.score = myValue * 2 + this.score;
+                }
+                break;
+            }
+        }
+        if (y != targetY) {
+            board.move(x, targetY, currTile);
+        }
     }
 
     /** Handles the movements of the tilt in column x of the board
@@ -180,10 +195,20 @@ public class Model {
      * */
     public void tiltColumn(int x) {
         // TODO: Task 7. Fill in this function.
+        for (int y = size()-1; y >=0; y-=1){
+            if (tile(x,y) !=null) {
+                moveTileUpAsFarAsPossible(x, y);
+            }
+        }
     }
 
     public void tilt(Side side) {
         // TODO: Tasks 8 and 9. Fill in this function.
+        board.setViewingPerspective(side);
+        for (int x =0; x < size(); x +=1){
+            tiltColumn(x);
+        }
+        board.setViewingPerspective(Side.NORTH);
     }
 
     /** Tilts every column of the board toward SIDE.

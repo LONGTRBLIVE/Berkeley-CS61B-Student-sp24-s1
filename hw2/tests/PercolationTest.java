@@ -1,3 +1,4 @@
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Test;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -81,8 +82,17 @@ public class PercolationTest {
     // TODO: Using the given tests above as a template,
     //       write some more tests and delete the fail() line
     @Test
-    public void yourFirstTestHere() {
-        fail("Did you write your own tests?");
+    public void isFullTest() {
+        int N = 2;
+        Percolation p = new Percolation(N);
+        p.open(0, 0);
+        p.open(1, 0);
+        Cell[][] expectedState = {
+                {Cell.FULL, Cell.CLOSED},
+                {Cell.FULL, Cell.CLOSED}
+        };
+        assertThat(getState(N, p)).isEqualTo(expectedState);
+        assertThat(p.isFull(0, 1)).isFalse();
     }
 
 }
